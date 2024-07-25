@@ -1,0 +1,53 @@
+<h3>Login / signup with local Storage {{activeform}}</h3>
+<form *ngIf="activeform==='signup'"#signupForm="ngForm" (ngSubmit)="onsignup()">
+    <input type="text" name="firstname"id="firstname"[(ngModel)]="signupobj.firstname" #firstname="ngModel"placeholder="Enter the FirstName" pattern="[a-zA-Z]+$" required >
+    <br/>
+    <span *ngIf ="firstname.invalid && firstname.touched" style="color:red">enter valid input</span>
+    <br/>
+
+    <input type ="text" name="lastname"id="lastname"[(ngModel)]="signupobj.lastname"#lastname="ngModel"placeholder="Enter LastName"pattern="[a-zA-Z]+$"required><br/>
+    <span *ngIf ="lastname.invalid && lastname.touched" style="color:red">enter valid input</span>
+    
+    <br/>
+    <input type="email" name="Email"id="email"[(ngModel)]="signupobj.email"#email="ngModel" email placeholder="Enter Email"required>
+    <br/>
+    <span *ngIf ="email.invalid && email.touched" style="color:red">enter valid input</span>
+    <br/>
+    <input type="password"name="password"id="password"[(ngModel)]="signupobj.password"placeholder="Enter Password" required/>
+    <br/><br/>
+     <input type="tel"name="phone"id="phone"[(ngModel)]="signupobj.phone"#phone="ngModel"placeholder="Enter Phonenumber" minlength="10">
+    <br/>
+    <span *ngIf ="phone.invalid && phone.touched" style="color:red">enter valid input</span>
+    <br/>
+    <button type="submit" [disabled]="signupForm.invalid">Submit</button>
+    <br/><br/>
+    Alredady Registered ? <button (click)="Toggle('login')">LOGIN</button>
+</form>
+
+  <form *ngIf="activeform==='navigate'"#login_signupform="ngForm" >
+    <button (click)="Toggle('signup')"class="sign">signup</button>
+    <button (click)="Toggle('login')"style="padding-left:30px">login</button>
+  </form>
+
+
+<!--LoginForm--> 
+<form *ngIf="activeform==='login'" #loginform="ngForm"(ngSubmit)="onlogin()">
+    <input type="email"id="email" [(ngModel)]="loginobj.email"name="email"placeholder="Enter Email"required>
+    <br/><br/>
+    <input type="password" id="password" [(ngModel)]="loginobj.password" name="password"placeholder="Enter password" required>
+    <br/><br/>
+    <button type="submit">Login</button><br/><br/>
+    <button (click)="activeform='forgotpassword'">Forgot Password</button><br/><br/>
+    Not Registered ? <button (click)="Toggle('signup')">SIGNUP</button>
+</form>
+
+<!--ForgotPasswordForm-->
+   
+<form *ngIf="activeform==='forgotpassword'"(ngSubmit)="onResetPassword()">
+    <h3>ForgotPassword</h3>
+    <input type="email"name="email"id="email"[(ngModel)]="forgotpassobj.email"placeholder="Enter Email"required>
+    <br/><br/>
+    <input type="password"name="password"id="newPassword" [(ngModel)]="forgotpassobj.newPassword"placeholder="Enter new Password">
+    <br/><br/>
+    <button type="submit">Reset button</button>
+</form>

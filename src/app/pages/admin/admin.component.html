@@ -1,0 +1,35 @@
+<div *ngIf="!selectedFirstName">
+  <h1>Users Profile</h1>
+  <table border="0" cellpadding="5">
+    <tr>
+      <th>First Name</th>
+      <th>Action</th>
+    </tr>
+    <tr *ngFor="let firstname of (groupedUsers | keyvalue)">
+      <td>{{ firstname.key }}</td>
+      <td>
+        <button (click)="toggleView(firstname.key)" *ngIf="hasViewButton(firstname.key)">
+          View
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div *ngIf="selectedFirstName">
+  <h3>User Details for "{{ selectedFirstName }}"</h3>
+  <ol>
+    <li *ngFor="let user of groupedUsers[selectedFirstName]">
+      <ul>
+        <li><strong>First Name:</strong> {{ user.firstname }}</li>
+        <li><strong>Last Name:</strong> {{ user.lastname }}</li>
+        <li><strong>Email:</strong> {{ user.email }}</li>
+        <li><strong>Password:</strong> {{ user.password }}</li>
+        <li><strong>Phone Number:</strong> {{ user.phone }}</li>
+      </ul>
+    </li>
+  </ol>
+  <button (click)="backToList()">Back to List</button>
+</div>
+
+  
